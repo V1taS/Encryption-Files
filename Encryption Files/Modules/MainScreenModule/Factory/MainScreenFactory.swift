@@ -11,7 +11,11 @@ import UIKit
 protocol MainScreenFactoryOutput: AnyObject {}
 
 /// Cобытия которые отправляем от Presenter к Factory
-protocol MainScreenFactoryInput {}
+protocol MainScreenFactoryInput {
+  
+  /// Получаем общий размер всех файлов в мегабайтах
+  func calculateTotalSizeInMegabytesFor(_ data: [(data: Data, name: String, extension: String)]) -> String
+}
 
 /// Фабрика
 final class MainScreenFactory: MainScreenFactoryInput {
@@ -21,6 +25,18 @@ final class MainScreenFactory: MainScreenFactoryInput {
   weak var output: MainScreenFactoryOutput?
   
   // MARK: - Internal func
+  
+  func calculateTotalSizeInMegabytesFor(_ data: [(data: Data, name: String, extension: String)]) -> String {
+    // Считаем общий размер всех файлов в байтах
+    let totalSizeInBytes = data.reduce(0, { $0 + $1.data.count })
+
+    // Конвертируем размер в мегабайты
+    let totalSizeInMegabytes = Double(totalSizeInBytes) / (1024 * 1024)
+
+    // Форматируем результат с округлением до одной цифры после запятой
+    let formattedSize = String(format: "%.1f", totalSizeInMegabytes)
+    return formattedSize
+  }
 }
 
 // MARK: - Appearance

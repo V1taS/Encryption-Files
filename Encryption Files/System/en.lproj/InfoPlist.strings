@@ -1,0 +1,4 @@
+"NSPhotoLibraryAddUsageDescription" = "Share your gallery so you can upload a photo for further encryption";
+"NSPhotoLibraryUsageDescription" = "Share your gallery so you can upload a photo for further encryption";
+"NSDownloadsDirectoryUsageDescription" = "Share your files so you can save";
+"NSDocumentsDirectoryUsageDescription" = "Share your files so you can save";

@@ -30,25 +30,33 @@ protocol ApplicationServices {
   /// Сервис по работе с локальным хранилищем
   var fileManagerService: FileManagerService { get }
   
-  /// Сервис по работе с тайсером
-  var timerService: TimerService { get }
-  
   /// Сервис виброоткликов
   var hapticService: HapticService { get }
+  
+  /// Сервис кодирования файлов
+  var encryptionService: EncryptionService { get }
+  
+  /// Сервис архивации
+  var zipService: ZipService { get }
 }
 
 // MARK: - Реализация ApplicationServices
 
 final class ApplicationServicesImpl: ApplicationServices {
   
+  private let encryptionServiceImpl = EncryptionServiceImpl()
+  private let zipServiceImpl = ZipServiceImpl()
+  private let permissionServiceImpl = PermissionServiceImpl()
+  private let fileManagerImpl = FileManagerImpl()
+  
   // MARK: - Internal property
   
   var fileManagerService: FileManagerService {
-    FileManagerImpl()
+    fileManagerImpl
   }
   
   var permissionService: PermissionService {
-    PermissionServiceImpl()
+    permissionServiceImpl
   }
   
   var notificationService: NotificationService {
@@ -59,11 +67,15 @@ final class ApplicationServicesImpl: ApplicationServices {
     KeyboardServiceImpl()
   }
   
-  var timerService: TimerService {
-    TimerServiceImpl()
-  }
-  
   var hapticService: HapticService {
     HapticServiceImpl()
+  }
+  
+  var encryptionService: EncryptionService {
+    encryptionServiceImpl
+  }
+  
+  var zipService: ZipService {
+    zipServiceImpl
   }
 }
