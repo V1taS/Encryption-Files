@@ -36,8 +36,8 @@ protocol ApplicationServices {
   /// Сервис кодирования файлов
   var encryptionService: EncryptionService { get }
   
-  /// Сервис архивации
-  var zipService: ZipService { get }
+  /// Сервис по работе с метриками
+  var metricsService: MetricsService { get }
 }
 
 // MARK: - Реализация ApplicationServices
@@ -45,7 +45,6 @@ protocol ApplicationServices {
 final class ApplicationServicesImpl: ApplicationServices {
   
   private let encryptionServiceImpl = EncryptionServiceImpl()
-  private let zipServiceImpl = ZipServiceImpl()
   private let permissionServiceImpl = PermissionServiceImpl()
   private let fileManagerImpl = FileManagerImpl()
   
@@ -75,7 +74,7 @@ final class ApplicationServicesImpl: ApplicationServices {
     encryptionServiceImpl
   }
   
-  var zipService: ZipService {
-    zipServiceImpl
+  var metricsService: MetricsService {
+    MetricsServiceImpl()
   }
 }

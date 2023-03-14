@@ -64,11 +64,28 @@ final class MainScreenCoordinator: NSObject, MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
-  func didReceiveError() {
+  func decryptionError() {
+    services.metricsService.track(event: .decryptionError)
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: true,
                                                        timeout: nil,
                                                        active: {})
+  }
+  
+  func decryptionSuccessful() {
+    services.metricsService.track(event: .decryptionSuccessful)
+  }
+  
+  func encryptionError() {
+    services.metricsService.track(event: .encryptionError)
+    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+  
+  func encryptionSuccessful() {
+    services.metricsService.track(event: .encryptionSuccessful)
   }
   
   func requestGalleryError() {

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B6B2CEB29C1018B000D1E12 /* MetricsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6B2CEA29C1018B000D1E12 /* MetricsService.swift */; };
+		1B6B2CED29C101E6000D1E12 /* MetricsnEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6B2CEC29C101E6000D1E12 /* MetricsnEvents.swift */; };
+		1B6B2CF029C102EE000D1E12 /* YandexMobileMetrica in Frameworks */ = {isa = PBXBuildFile; productRef = 1B6B2CEF29C102EE000D1E12 /* YandexMobileMetrica */; };
+		1B6B2CF229C102EE000D1E12 /* YandexMobileMetricaCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 1B6B2CF129C102EE000D1E12 /* YandexMobileMetricaCrashes */; };
 		1BEA681129BDF7CD00DE2652 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA681029BDF7CD00DE2652 /* AppDelegate.swift */; };
 		1BEA681329BDF7CD00DE2652 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA681229BDF7CD00DE2652 /* SceneDelegate.swift */; };
 		1BEA681A29BDF7CE00DE2652 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BEA681929BDF7CE00DE2652 /* Assets.xcassets */; };
@@ -27,16 +31,16 @@
 		1BEA689529BDFCC500DE2652 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA689429BDFCC500DE2652 /* RootCoordinator.swift */; };
 		1BEA689829BDFD2200DE2652 /* RandomUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1BEA689729BDFD2200DE2652 /* RandomUIKit */; };
 		1BEA689B29BDFD3C00DE2652 /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 1BEA689A29BDFD3C00DE2652 /* Notifications */; };
-		1BEA689E29BDFD7300DE2652 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 1BEA689D29BDFD7300DE2652 /* Zip */; };
 		1BEA68A129BDFD9300DE2652 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1BEA68A029BDFD9300DE2652 /* CryptoSwift */; };
 		1BEA68A429BDFDBD00DE2652 /* MainScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA68A329BDFDBD00DE2652 /* MainScreenCoordinator.swift */; };
 		1BEA68A729BE00F400DE2652 /* EncryptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA68A629BE00F400DE2652 /* EncryptionService.swift */; };
-		1BEA68AA29BE017500DE2652 /* ZipService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA68A929BE017500DE2652 /* ZipService.swift */; };
 		1BEA68AD29BE2C7500DE2652 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BEA68AF29BE2C7500DE2652 /* InfoPlist.strings */; };
 		1BEA68B529BE3F0300DE2652 /* MainScreenViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA68B429BE3F0300DE2652 /* MainScreenViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B6B2CEA29C1018B000D1E12 /* MetricsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsService.swift; sourceTree = "<group>"; };
+		1B6B2CEC29C101E6000D1E12 /* MetricsnEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsnEvents.swift; sourceTree = "<group>"; };
 		1BEA680D29BDF7CD00DE2652 /* Encryption Files.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Encryption Files.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BEA681029BDF7CD00DE2652 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BEA681229BDF7CD00DE2652 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,7 +67,6 @@
 		1BEA689429BDFCC500DE2652 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		1BEA68A329BDFDBD00DE2652 /* MainScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenCoordinator.swift; sourceTree = "<group>"; };
 		1BEA68A629BE00F400DE2652 /* EncryptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionService.swift; sourceTree = "<group>"; };
-		1BEA68A929BE017500DE2652 /* ZipService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipService.swift; sourceTree = "<group>"; };
 		1BEA68AE29BE2C7500DE2652 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1BEA68B029BE2C7900DE2652 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1BEA68B129BE2C7A00DE2652 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -77,8 +80,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BEA689E29BDFD7300DE2652 /* Zip in Frameworks */,
+				1B6B2CF229C102EE000D1E12 /* YandexMobileMetricaCrashes in Frameworks */,
 				1BEA68A129BDFD9300DE2652 /* CryptoSwift in Frameworks */,
+				1B6B2CF029C102EE000D1E12 /* YandexMobileMetrica in Frameworks */,
 				1BEA689829BDFD2200DE2652 /* RandomUIKit in Frameworks */,
 				1BEA689B29BDFD3C00DE2652 /* Notifications in Frameworks */,
 			);
@@ -87,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B6B2CE929C10180000D1E12 /* MetricsService */ = {
+			isa = PBXGroup;
+			children = (
+				1B6B2CEA29C1018B000D1E12 /* MetricsService.swift */,
+				1B6B2CEC29C101E6000D1E12 /* MetricsnEvents.swift */,
+			);
+			path = MetricsService;
+			sourceTree = "<group>";
+		};
 		1BEA680429BDF7CD00DE2652 = {
 			isa = PBXGroup;
 			children = (
@@ -150,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				1BEA682E29BDF95E00DE2652 /* ApplicationServices.swift */,
-				1BEA68A829BE016F00DE2652 /* ZipService */,
+				1B6B2CE929C10180000D1E12 /* MetricsService */,
 				1BEA68A529BE00EE00DE2652 /* EncryptionService */,
 				1BEA684029BDF95E00DE2652 /* FileManagerService */,
 				1BEA685629BDF95E00DE2652 /* HapticService */,
@@ -270,14 +283,6 @@
 			path = EncryptionService;
 			sourceTree = "<group>";
 		};
-		1BEA68A829BE016F00DE2652 /* ZipService */ = {
-			isa = PBXGroup;
-			children = (
-				1BEA68A929BE017500DE2652 /* ZipService.swift */,
-			);
-			path = ZipService;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -298,8 +303,9 @@
 			packageProductDependencies = (
 				1BEA689729BDFD2200DE2652 /* RandomUIKit */,
 				1BEA689A29BDFD3C00DE2652 /* Notifications */,
-				1BEA689D29BDFD7300DE2652 /* Zip */,
 				1BEA68A029BDFD9300DE2652 /* CryptoSwift */,
+				1B6B2CEF29C102EE000D1E12 /* YandexMobileMetrica */,
+				1B6B2CF129C102EE000D1E12 /* YandexMobileMetricaCrashes */,
 			);
 			productName = "Encryption Files";
 			productReference = 1BEA680D29BDF7CD00DE2652 /* Encryption Files.app */;
@@ -336,8 +342,8 @@
 			packageReferences = (
 				1BEA689629BDFD2200DE2652 /* XCRemoteSwiftPackageReference "RandomUIKit" */,
 				1BEA689929BDFD3C00DE2652 /* XCRemoteSwiftPackageReference "Notifications" */,
-				1BEA689C29BDFD7300DE2652 /* XCRemoteSwiftPackageReference "Zip" */,
 				1BEA689F29BDFD9300DE2652 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
+				1B6B2CEE29C102EE000D1E12 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
 			);
 			productRefGroup = 1BEA680E29BDF7CD00DE2652 /* Products */;
 			projectDirPath = "";
@@ -398,14 +404,15 @@
 				1BEA687529BDF95E00DE2652 /* PermissionService.swift in Sources */,
 				1BEA688A29BDFC4D00DE2652 /* MainScreenAssembly.swift in Sources */,
 				1BEA686829BDF95E00DE2652 /* KeyboardService.swift in Sources */,
-				1BEA68AA29BE017500DE2652 /* ZipService.swift in Sources */,
 				1BEA68A429BDFDBD00DE2652 /* MainScreenCoordinator.swift in Sources */,
 				1BEA689529BDFCC500DE2652 /* RootCoordinator.swift in Sources */,
 				1BEA688929BDFC4D00DE2652 /* MainScreenViewController.swift in Sources */,
 				1BEA681129BDF7CD00DE2652 /* AppDelegate.swift in Sources */,
 				1BEA688829BDFC4D00DE2652 /* MainScreenFactory.swift in Sources */,
 				1BEA686729BDF95E00DE2652 /* FileManagerService.swift in Sources */,
+				1B6B2CEB29C1018B000D1E12 /* MetricsService.swift in Sources */,
 				1BEA685B29BDF95E00DE2652 /* ApplicationServices.swift in Sources */,
+				1B6B2CED29C101E6000D1E12 /* MetricsnEvents.swift in Sources */,
 				1BEA685A29BDF95E00DE2652 /* NotificationService.swift in Sources */,
 				1BEA681329BDF7CD00DE2652 /* SceneDelegate.swift in Sources */,
 			);
@@ -653,6 +660,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1B6B2CEE29C102EE000D1E12 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yandexmobile/metrica-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		1BEA689629BDFD2200DE2652 /* XCRemoteSwiftPackageReference "RandomUIKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomUIKit.git";
@@ -669,14 +684,6 @@
 				kind = branch;
 			};
 		};
-		1BEA689C29BDFD7300DE2652 /* XCRemoteSwiftPackageReference "Zip" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/marmelroy/Zip.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		1BEA689F29BDFD9300DE2652 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
@@ -688,6 +695,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1B6B2CEF29C102EE000D1E12 /* YandexMobileMetrica */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B6B2CEE29C102EE000D1E12 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetrica;
+		};
+		1B6B2CF129C102EE000D1E12 /* YandexMobileMetricaCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B6B2CEE29C102EE000D1E12 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetricaCrashes;
+		};
 		1BEA689729BDFD2200DE2652 /* RandomUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1BEA689629BDFD2200DE2652 /* XCRemoteSwiftPackageReference "RandomUIKit" */;
@@ -697,11 +714,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1BEA689929BDFD3C00DE2652 /* XCRemoteSwiftPackageReference "Notifications" */;
 			productName = Notifications;
-		};
-		1BEA689D29BDFD7300DE2652 /* Zip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BEA689C29BDFD7300DE2652 /* XCRemoteSwiftPackageReference "Zip" */;
-			productName = Zip;
 		};
 		1BEA68A029BDFD9300DE2652 /* CryptoSwift */ = {
 			isa = XCSwiftPackageProductDependency;

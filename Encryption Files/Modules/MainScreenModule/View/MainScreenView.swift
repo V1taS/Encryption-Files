@@ -14,16 +14,14 @@ protocol MainScreenViewOutput: AnyObject {
   
   /// Кнопка зашифровать была нажата
   func encryptButtonAction(_ data: [(data: Data, name: String, extension: String)],
-                           password: String,
-                           isArchive: Bool,
-                           estimatedSecondsEncrypted: ((Double) -> Void)?,
-                           progress: ((Double) -> Void)?)
+                           password: String)
   
   /// Кнопка расшифровать была нажата
   func decryptButtonAction(_ data: [(data: Data, name: String, extension: String)],
-                           password: String,
-                           estimatedSecondsEncrypted: ((Double) -> Void)?,
-                           progress: ((Double) -> Void)?)
+                           password: String)
+  
+  /// Запустить таймер отсчета в обратную сторону
+  func estimatedSecondsActuon()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -34,6 +32,15 @@ protocol MainScreenViewInput {
   
   /// Обновить общий размер файлов
   func updateTotalItemsSizeMB(_ size: String)
+  
+  /// Обновить оставшее время
+  func updateEstimatedSeconds(_ seconds: Double)
+  
+  /// Файлы успешно зашифрованы
+  func encryptFilesSuccess()
+  
+  /// Была нажата кнопка очистить
+  func clearButtonAction()
 }
 
 /// Псевдоним протокола UIView & MainScreenViewInput
@@ -50,14 +57,10 @@ final class MainScreenView: MainScreenViewProtocol {
   
   private let passwordLabel = UILabel()
   private let passwordTextField = TextFieldView()
-
-  private let inArchiveEncryptionLabel = UILabel()
-  private let inArchiveEncryptionSwitch = UISwitch()
   
   private let countItemsLabel = UILabel()
   private let totalItemsSizeMBLabel = UILabel()
   private let estimatedSecondsLabel = UILabel()
-  private let progressView = UIProgressView()
   
   private var plugEmptyItemsLottie = LottieAnimationView(name: Appearance().plugEmptyItemsLottieImage)
   private var decryptLottie = LottieAnimationView(name: Appearance().encryptLottieImage)
@@ -67,7 +70,6 @@ final class MainScreenView: MainScreenViewProtocol {
   private let stackButtons = UIStackView()
   
   private let tableView = TableView()
-  
   private var items: [(data: Data, name: String, extension: String)] = []
   
   // MARK: - Initialization
@@ -97,23 +99,38 @@ final class MainScreenView: MainScreenViewProtocol {
       plugEmptyItemsLottie.isHidden = false
       plugEmptyItemsLottie.play()
       tableView.isHidden = true
+      setButton(isEnabled: false)
     } else {
       plugEmptyItemsLottie.isHidden = true
       plugEmptyItemsLottie.stop()
       tableView.isHidden = false
+      setButton(isEnabled: true)
     }
+    totalItemsSizeMBLabel.isHidden = false
+    countItemsLabel.isHidden = false
+    estimatedSecondsLabel.isHidden = false
   }
   
   func updateTotalItemsSizeMB(_ size: String) {
-    totalItemsSizeMBLabel.text = "\(Appearance().totalItemsSizeMBTitle): \(size) Mb"
+    totalItemsSizeMBLabel.text = "\(Appearance().totalItemsSizeMBTitle): \(size) \(Appearance().mbTitle)"
   }
   
-  func startProgress() {
-    // TODO: -
+  func updateEstimatedSeconds(_ seconds: Double) {
+    estimatedSecondsLabel.text = "\(Appearance().estimatedSecondsTitle): \(Int(seconds)) \(Appearance().secondsTitle)."
   }
   
-  func stopProgress() {
-    // TODO: -
+  func encryptFilesSuccess() {
+    decryptLottie.stop()
+    decryptLottie.isHidden = true
+    
+    plugEmptyItemsLottie.isHidden = false
+    plugEmptyItemsLottie.play()
+  }
+  
+  func clearButtonAction() {
+    estimatedSecondsLabel.isHidden = true
+    totalItemsSizeMBLabel.isHidden = true
+    countItemsLabel.isHidden = true
   }
 }
 
@@ -126,10 +143,8 @@ private extension MainScreenView {
       stackButtons.addArrangedSubview($0)
     }
     
-    [passwordLabel, passwordTextField, inArchiveEncryptionLabel,
-     inArchiveEncryptionSwitch, countItemsLabel, totalItemsSizeMBLabel,
-     estimatedSecondsLabel, progressView, tableView, stackButtons,
-     plugEmptyItemsLottie, decryptLottie].forEach {
+    [passwordLabel, passwordTextField, countItemsLabel, totalItemsSizeMBLabel, estimatedSecondsLabel,
+     tableView, stackButtons, plugEmptyItemsLottie, decryptLottie].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -141,14 +156,8 @@ private extension MainScreenView {
       passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 4),
       passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
       
-      inArchiveEncryptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      inArchiveEncryptionLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
-      inArchiveEncryptionSwitch.centerYAnchor.constraint(equalTo: inArchiveEncryptionLabel.centerYAnchor),
-      inArchiveEncryptionSwitch.leadingAnchor.constraint(equalTo: inArchiveEncryptionLabel.trailingAnchor, constant: 16),
-      inArchiveEncryptionSwitch.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-      
       countItemsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      countItemsLabel.topAnchor.constraint(equalTo: inArchiveEncryptionLabel.bottomAnchor, constant: 16),
+      countItemsLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
       countItemsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
       totalItemsSizeMBLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
       totalItemsSizeMBLabel.topAnchor.constraint(equalTo: countItemsLabel.bottomAnchor, constant: 4),
@@ -156,25 +165,22 @@ private extension MainScreenView {
       estimatedSecondsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
       estimatedSecondsLabel.topAnchor.constraint(equalTo: totalItemsSizeMBLabel.bottomAnchor, constant: 4),
       estimatedSecondsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-      progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      progressView.topAnchor.constraint(equalTo: estimatedSecondsLabel.bottomAnchor, constant: 4),
-      progressView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
       
       plugEmptyItemsLottie.leadingAnchor.constraint(equalTo: leadingAnchor),
-      plugEmptyItemsLottie.topAnchor.constraint(greaterThanOrEqualTo: progressView.bottomAnchor),
+      plugEmptyItemsLottie.topAnchor.constraint(greaterThanOrEqualTo: estimatedSecondsLabel.bottomAnchor),
       plugEmptyItemsLottie.trailingAnchor.constraint(equalTo: trailingAnchor),
       plugEmptyItemsLottie.bottomAnchor.constraint(equalTo: stackButtons.topAnchor),
       plugEmptyItemsLottie.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 2),
       
       decryptLottie.leadingAnchor.constraint(equalTo: leadingAnchor),
-      decryptLottie.topAnchor.constraint(greaterThanOrEqualTo: progressView.bottomAnchor,
+      decryptLottie.topAnchor.constraint(greaterThanOrEqualTo: estimatedSecondsLabel.bottomAnchor,
                                          constant: 16),
       decryptLottie.trailingAnchor.constraint(equalTo: trailingAnchor),
       decryptLottie.bottomAnchor.constraint(equalTo: stackButtons.topAnchor),
       decryptLottie.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 2),
       
       tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      tableView.topAnchor.constraint(equalTo: progressView.bottomAnchor),
+      tableView.topAnchor.constraint(equalTo: estimatedSecondsLabel.bottomAnchor, constant: 16),
       tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
       tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
       
@@ -215,45 +221,55 @@ private extension MainScreenView {
     tableView.showsVerticalScrollIndicator = false
     
     passwordLabel.text = appearance.passwordTitle
-    inArchiveEncryptionLabel.text = "\(appearance.inArchiveEncryptionTitle)?"
-    countItemsLabel.text = "\(appearance.countItemsTitle): 0"
-    totalItemsSizeMBLabel.text = "\(appearance.totalItemsSizeMBTitle): 0 Mb"
-    estimatedSecondsLabel.text = "\(appearance.estimatedSecondsTitle): 0 \(appearance.secondsTitle)"
-    
     stackButtons.axis = .horizontal
     stackButtons.distribution = .fillEqually
     stackButtons.spacing = 16
-    
-    encryptButton.setTitle(appearance.encryptButtonTitle, for: .normal)
-    encryptButton.gradientBackground = [
-      RandomColor.only.primaryRed,
-      RandomColor.only.primaryPink
-    ]
-    decryptButton.setTitle(appearance.decryptButtonTitle, for: .normal)
+    passwordTextField.placeholder = "12345678"
+    passwordTextField.layer.borderColor = RandomColor.only.primaryGray.cgColor
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
     tap.cancelsTouchesInView = false
     addGestureRecognizer(tap)
     isUserInteractionEnabled = true
     
+    encryptButton.setTitle(appearance.encryptButtonTitle, for: .normal)
+    decryptButton.setTitle(appearance.decryptButtonTitle, for: .normal)
     encryptButton.addTarget(self, action: #selector(encryptButtonAction), for: .touchUpInside)
     decryptButton.addTarget(self, action: #selector(decryptButtonAction), for: .touchUpInside)
+    
+    setButton(isEnabled: false)
+  }
+  
+  func setButton(isEnabled: Bool) {
+    encryptButton.set(isEnabled: isEnabled)
+    decryptButton.set(isEnabled: isEnabled)
+    
+    if isEnabled {
+      encryptButton.gradientBackground = [
+        RandomColor.only.primaryRed,
+        RandomColor.only.primaryPink
+      ]
+      decryptButton.gradientBackground = [
+        RandomColor.only.primaryGreen,
+        RandomColor.only.secondaryGreen
+      ]
+    } else {
+      encryptButton.gradientBackground = [
+        RandomColor.only.primaryGray,
+        RandomColor.only.secondaryGray
+      ]
+      decryptButton.gradientBackground = [
+        RandomColor.only.primaryGray,
+        RandomColor.only.secondaryGray
+      ]
+    }
   }
   
   @objc
   func encryptButtonAction() {
-    let appearance = Appearance()
+    output?.estimatedSecondsActuon()
     output?.encryptButtonAction(items,
-                                password: passwordTextField.text ?? "4j6HqL!)3F",
-                                isArchive: inArchiveEncryptionSwitch.isOn,
-                                estimatedSecondsEncrypted: { [weak self] seconds in
-      self?.estimatedSecondsLabel.text = "\(appearance.estimatedSecondsTitle): \(seconds) \(appearance.secondsTitle)"
-    },
-                                progress: { [weak self] progress in
-      DispatchQueue.main.async {
-        self?.progressView.setProgress(Float(progress), animated: true)
-      }
-    })
+                                password: passwordTextField.text ?? Appearance().passwordDefault)
     
     decryptLottie.isHidden = false
     decryptLottie.play()
@@ -265,17 +281,8 @@ private extension MainScreenView {
   
   @objc
   func decryptButtonAction() {
-    let appearance = Appearance()
-    output?.decryptButtonAction(items,
-                                password: passwordTextField.text ?? "4j6HqL!)3F",
-                                estimatedSecondsEncrypted: { [weak self] seconds in
-      self?.estimatedSecondsLabel.text = "\(appearance.estimatedSecondsTitle): \(seconds) \(appearance.secondsTitle)"
-    },
-                                progress: { [weak self] progress in
-      DispatchQueue.main.async {
-        self?.progressView.setProgress(Float(progress), animated: true)
-      }
-    })
+    output?.estimatedSecondsActuon()
+    output?.decryptButtonAction(items, password: passwordTextField.text ?? Appearance().passwordDefault)
     
     decryptLottie.isHidden = false
     decryptLottie.play()
@@ -319,13 +326,14 @@ private extension MainScreenView {
     let encryptLottieImage = "cell_lottie"
     let animationSpeed: CGFloat = 0.5
     
-    let passwordTitle = NSLocalizedString("Введите пароль для шифрования", comment: "")
-    let inArchiveEncryptionTitle = NSLocalizedString("Добавлять файлы в архив", comment: "")
+    let passwordTitle = NSLocalizedString("Введите пароль", comment: "")
     let countItemsTitle = NSLocalizedString("Выбрано файлов", comment: "")
-    let estimatedSecondsTitle = NSLocalizedString("Осталось примерно", comment: "")
-    let secondsTitle = NSLocalizedString("секунд", comment: "")
+    let estimatedSecondsTitle = NSLocalizedString("Время выполнения", comment: "")
     let encryptButtonTitle = NSLocalizedString("Зашифровать", comment: "")
     let decryptButtonTitle = NSLocalizedString("Расшифровать", comment: "")
     let totalItemsSizeMBTitle = NSLocalizedString("Общий размер файлов", comment: "")
+    let secondsTitle = NSLocalizedString("сек", comment: "")
+    let passwordDefault = "4j6HqL!)3F"
+    let mbTitle = NSLocalizedString("Мб", comment: "")
   }
 }

@@ -16,8 +16,11 @@ protocol MainScreenInteractorOutput: AnyObject {
   /// Файлы успешно расшифрованы
   func decryptFilesSuccess(_ data: [(data: Data, name: String, extension: String)])
   
-  /// Получена ошибка
-  func didReceiveError()
+  /// Ошибка в шифровании
+  func encryptionError()
+  
+  /// Оставшее время
+  func didReceiveEstimatedSeconds(_ seconds: Double)
   
   /// Получен доступ к галерее для сохранения фото
   func requestShareGallerySuccess()
@@ -27,6 +30,9 @@ protocol MainScreenInteractorOutput: AnyObject {
   
   /// Доступ к галерее не получен
   func requestGalleryError()
+  
+  /// Расшифровка с ошибкой
+  func decryptionError()
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -39,16 +45,14 @@ protocol MainScreenInteractorInput {
   
   /// Кнопка зашифровать была нажата
   func encryptButtonAction(_ data: [(data: Data, name: String, extension: String)],
-                           password: String,
-                           isArchive: Bool,
-                           estimatedSecondsEncrypted: ((Double) -> Void)?,
-                           progress: ((Double) -> Void)?)
+                           password: String)
   
   /// Кнопка расшифровать была нажата
   func decryptButtonAction(_ data: [(data: Data, name: String, extension: String)],
-                           password: String,
-                           estimatedSecondsEncrypted: ((Double) -> Void)?,
-                           progress: ((Double) -> Void)?)
+                           password: String)
+  
+  /// Запустить таймер отсчета в обратную сторону
+  func estimatedSecondsActuon()
 }
 
 /// Интерактор
@@ -61,6 +65,8 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   // MARK: - Private properties
   
   private let services: ApplicationServices
+  private var timer: Timer?
+  private var estimatedSeconds: Double = .zero
   
   // MARK: - Initialization
   
@@ -72,99 +78,49 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   
   // MARK: - Internal func
   
+  func estimatedSecondsActuon() {
+    estimatedSeconds = .zero
+    let timer = Timer(timeInterval: 1,
+                      target: self,
+                      selector: #selector(startTimer),
+                      userInfo: nil,
+                      repeats: true)
+    self.timer = timer
+    RunLoop.current.add(timer, forMode: .common)
+  }
+  
   func encryptButtonAction(_ data: [(data: Data, name: String, extension: String)],
-                           password: String,
-                           isArchive: Bool,
-                           estimatedSecondsEncrypted: ((Double) -> Void)?,
-                           progress: ((Double) -> Void)?) {
-    if isArchive {
-      services.encryptionService.encryptFiles(
-        data,
-        password: password,
-        estimatedSecondsEncrypted: estimatedSecondsEncrypted
-      ) { [weak self] encryptionFiles in
-        guard !encryptionFiles.isEmpty else {
-          self?.output?.didReceiveError()
-          return
-        }
-        
-        self?.services.zipService.zipFiles(encryptionFiles,
-                                           progress: progress,
-                                           completion: { [weak self] data in
-          guard let data else {
-            self?.output?.didReceiveError()
-            return
-          }
-          self?.output?.encryptFilesSuccess([data])
-        })
+                           password: String) {
+    services.encryptionService.encryptFiles(
+      data,
+      password: password
+    ) { [weak self] encryptionFiles in
+      guard !encryptionFiles.isEmpty else {
+        self?.output?.encryptionError()
+        self?.stopTimer()
+        return
       }
-    } else {
-      services.encryptionService.encryptFiles(
-        data,
-        password: password,
-        estimatedSecondsEncrypted: estimatedSecondsEncrypted
-      ) { [weak self] encryptionFiles in
-        guard !encryptionFiles.isEmpty else {
-          self?.output?.didReceiveError()
-          return
-        }
-        self?.output?.encryptFilesSuccess(encryptionFiles)
-      }
+      self?.output?.encryptFilesSuccess(encryptionFiles)
+      self?.stopTimer()
     }
   }
   
   func decryptButtonAction(_ data: [(data: Data, name: String, extension: String)],
-                           password: String,
-                           estimatedSecondsEncrypted: ((Double) -> Void)?,
-                           progress: ((Double) -> Void)?) {
+                           password: String) {
     guard !data.isEmpty else {
-      output?.didReceiveError()
+      output?.decryptionError()
+      stopTimer()
       return
     }
     
-    let hasZipFiles = data.contains { data in
-      data.extension == "zip"
-    }
-    
-    if hasZipFiles {
-      let dispatchGroup = DispatchGroup()
-      
-      data.forEach { _ in
-        dispatchGroup.enter()
+    services.encryptionService.decryptFiles(
+      data,
+      password: password,
+      completion: { [weak self] data in
+        self?.output?.decryptFilesSuccess(data)
+        self?.stopTimer()
       }
-      var listData: [(data: Data, name: String, extension: String)] = []
-      
-      DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-        data.forEach {
-          self?.services.zipService.unzipFiles(
-            data: $0,
-            progress: nil) { data in
-              listData.append(contentsOf: data)
-              dispatchGroup.leave()
-            }
-        }
-      }
-      
-      dispatchGroup.notify(queue: .global(qos: .userInteractive)) { [weak self] in
-        self?.services.encryptionService.decryptFiles(
-          listData,
-          password: password,
-          estimatedSecondsDecrypt: estimatedSecondsEncrypted) { data in
-            DispatchQueue.main.async { [weak self] in
-              self?.output?.decryptFilesSuccess(data)
-            }
-          }
-      }
-    } else {
-      services.encryptionService.decryptFiles(
-        data,
-        password: password,
-        estimatedSecondsDecrypt: estimatedSecondsEncrypted,
-        completion: { [weak self] data in
-          self?.output?.decryptFilesSuccess(data)
-        }
-      )
-    }
+    )
   }
   
   func requestShareGalleryStatus() {
@@ -197,6 +153,19 @@ private extension MainScreenInteractor {
     services.permissionService.requestPhotos { granted in
       completion(granted)
     }
+  }
+  
+  func stopTimer() {
+    if timer != nil {
+      timer?.invalidate()
+      timer = nil
+    }
+  }
+  
+  @objc
+  func startTimer() {
+    estimatedSeconds += 1
+    output?.didReceiveEstimatedSeconds(estimatedSeconds)
   }
 }
 
