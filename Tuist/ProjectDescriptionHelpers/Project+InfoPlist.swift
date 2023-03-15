@@ -17,9 +17,6 @@ public func getMainInfoPlist() -> ProjectDescription.InfoPlist {
     "LSSupportsOpeningDocumentsInPlace": .boolean(true),
     "CFBundleLocalizations": .array([
       .string("en"),
-      .string("de"),
-      .string("es"),
-      .string("it"),
       .string("ru")
     ]),
     "CODE_SIGN_STYLE": .string("Automatic"),
@@ -43,7 +40,6 @@ public func getMainInfoPlist() -> ProjectDescription.InfoPlist {
     "NSAccentColorName": .string("AccentColor"),
     "CFBundleInfoDictionaryVersion": .string("6.0"),
     "NSContactsUsageDescription": .string("Provide access to randomly generate contacts"),
-    "NSUserTrackingUsageDescription": .string("Can you use your activity data? If you allow, Random Pro's ads on websites and other apps will be more relevant."),
     "NSPhotoLibraryUsageDescription": .string("Please provide access to the Photo Library"),
     "DTXcode": .integer(1420),
     "LSRequiresIPhoneOS": .boolean(true),
