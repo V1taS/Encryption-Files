@@ -331,14 +331,14 @@ private extension MainScreenView {
     let encryptLottieImage = "cell_lottie"
     let animationSpeed: CGFloat = 0.5
     
-    let passwordTitle = NSLocalizedString("Введите пароль", comment: "")
-    let countItemsTitle = NSLocalizedString("Выбрано файлов", comment: "")
-    let estimatedSecondsTitle = NSLocalizedString("Время выполнения", comment: "")
-    let encryptButtonTitle = NSLocalizedString("Зашифровать", comment: "")
-    let decryptButtonTitle = NSLocalizedString("Расшифровать", comment: "")
-    let totalItemsSizeMBTitle = NSLocalizedString("Общий размер файлов", comment: "")
-    let secondsTitle = NSLocalizedString("сек", comment: "")
+    let passwordTitle = "Введите пароль".localized()
+    let countItemsTitle = "Выбрано файлов".localized()
+    let estimatedSecondsTitle = "Время выполнения".localized()
+    let encryptButtonTitle = "Зашифровать".localized()
+    let decryptButtonTitle = "Расшифровать".localized()
+    let totalItemsSizeMBTitle = "Общий размер файлов".localized()
+    let secondsTitle = "сек".localized()
     let passwordDefault = "4j6HqL!)3F"
-    let mbTitle = NSLocalizedString("Мб", comment: "")
+    let mbTitle = "Мб".localized()
   }
 }

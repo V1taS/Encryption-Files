@@ -10,7 +10,7 @@ let dependencies = Dependencies(
       .remote(url: "https://github.com/krzyzanowskim/CryptoSwift.git",
               requirement: .branch("main")),
       .remote(url: "https://github.com/yandexmobile/metrica-sdk-ios",
-              requirement: .upToNextMajor(from: "4.0.0"))
+              requirement: .upToNextMajor(from: "4.4.0"))
     ],
     productTypes: [
       "RandomUIKit": .framework,

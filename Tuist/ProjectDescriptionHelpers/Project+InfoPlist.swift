@@ -3,6 +3,10 @@ import ProjectDescription
 
 public func getMainInfoPlist() -> ProjectDescription.InfoPlist {
   return .dictionary([
+    "MARKETING_VERSION": .string("\(marketingVersion)"),
+    "CFBundleShortVersionString": .string("\(marketingVersion)"),
+    "CFBundleVersion": .string("\(currentProjectVersion)"),
+    "CURRENT_PROJECT_VERSION": .string("\(currentProjectVersion)"),
     "PRODUCT_BUNDLE_IDENTIFIER": .string("com.sosinvitalii.Encryption-Files"),
     "DISPLAY_NAME": .string("Encryption Files"),
     "IPHONEOS_DEPLOYMENT_TARGET": .string("13.0"),
@@ -11,12 +15,16 @@ public func getMainInfoPlist() -> ProjectDescription.InfoPlist {
     "INDENT_WIDTH": .string("2"),
     "DEVELOPMENT_TEAM": .string("34VDSPZYU9"),
     "LSSupportsOpeningDocumentsInPlace": .boolean(true),
+    "CFBundleLocalizations": .array([
+      .string("en"),
+      .string("de"),
+      .string("es"),
+      .string("it"),
+      .string("ru")
+    ]),
     "CODE_SIGN_STYLE": .string("Automatic"),
     "CODE_SIGN_IDENTITY": .string("iPhone Developer"),
     "ENABLE_BITCODE": .string("NO"),
-    "CURRENT_PROJECT_VERSION": .string("1"),
-    "MARKETING_VERSION": .string("1.0"),
-    "CFBundleVersion": .string("1.0"),
     "CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED": .string("YES"),
     "ENABLE_TESTABILITY": .string("YES"),
     "VALID_ARCHS": .string("arm64"),
@@ -24,7 +32,6 @@ public func getMainInfoPlist() -> ProjectDescription.InfoPlist {
     "CFBundleName": .string("Encryption Files"),
     "CFBundleDisplayName": .string("Encryption Files"),
     "CFBundleIdentifier": .string("com.sosinvitalii.Encryption-Files"),
-    "CFBundleShortVersionString": .string("1.0"),
     "LSApplicationCategoryType": .string("public.app-category.utilities"),
     "ITSAppUsesNonExemptEncryption": .boolean(false),
     "TARGETED_DEVICE_FAMILY": .string("1,2"),
@@ -62,7 +69,7 @@ public func getMainInfoPlist() -> ProjectDescription.InfoPlist {
         ])
       ])
     ]),
-    "DTPlatformName": .string("iphonesimulator"),
+    "DTPlatformName": .string("iphoneos"),
     "DTXcodeBuild": .string("14C18"),
     "NSPhotoLibraryAddUsageDescription": .string("Please provide access to the Photo Library"),
     "UISupportedInterfaceOrientations~ipad": .array([

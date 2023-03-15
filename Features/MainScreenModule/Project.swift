@@ -13,7 +13,15 @@ let project = Project(
       product: .framework,
       bundleId: "\(reverseOrganizationName).\(appName).\(mainScreenModule)",
       deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
-      infoPlist: .default,
+      infoPlist: .extendingDefault(with: [
+        "CFBundleLocalizations": .array([
+          .string("en"),
+          .string("de"),
+          .string("es"),
+          .string("it"),
+          .string("ru")
+        ])
+      ]),
       sources: [
         "Sources/**"
       ],

@@ -267,7 +267,7 @@ private extension MainScreenViewController {
 
 private extension MainScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Encryption Files", comment: "")
+    let title = "Encryption Files".localized()
     let openFileButtonIcon = UIImage(systemName: "plus")
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
     let clearButtonActionIcon = UIImage(systemName: "trash")

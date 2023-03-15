@@ -2,6 +2,12 @@ import Foundation
 
 // MARK: - Public property
 
+/// Info plist
+// Сборке для App store
+public let marketingVersion = "1.1"
+// С каждой сборкой увеличиваем на 1
+public let currentProjectVersion = "2"
+
 /// App
 public let organizationName = "SosinVitalii.com"
 public let reverseOrganizationName = "com.sosinvitalii"
