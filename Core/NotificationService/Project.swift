@@ -25,7 +25,8 @@ let project = Project(
         scriptSwiftLint
       ],
       dependencies: [
-        .external(name: "Notifications")
+        .external(name: "Notifications"),
+        .external(name: "RandomUIKit")
       ]
     ),
     Target(
