@@ -327,7 +327,6 @@ extension MainScreenCoordinator: PHPickerViewControllerDelegate {
         }
       }
     }
-    
     dispatchGroup.notify(queue: .main) {
       self.mainScreenModule?.uploadContentsData(listData)
     }

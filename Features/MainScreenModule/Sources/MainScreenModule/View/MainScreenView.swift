@@ -110,7 +110,7 @@ final class MainScreenView: MainScreenViewProtocol {
     }
     totalItemsSizeMBLabel.isHidden = false
     countItemsLabel.isHidden = false
-    estimatedSecondsLabel.isHidden = false
+    estimatedSecondsLabel.isHidden = true
   }
   
   func updateTotalItemsSizeMB(_ size: String) {
@@ -119,6 +119,7 @@ final class MainScreenView: MainScreenViewProtocol {
   
   func updateEstimatedSeconds(_ seconds: Double) {
     estimatedSecondsLabel.text = "\(Appearance().estimatedSecondsTitle): \(Int(seconds)) \(Appearance().secondsTitle)."
+    estimatedSecondsLabel.isHidden = false
   }
   
   func encryptFilesSuccess() {
@@ -130,9 +131,11 @@ final class MainScreenView: MainScreenViewProtocol {
   }
   
   func clearButtonAction() {
+    estimatedSecondsLabel.text = "\(Appearance().estimatedSecondsTitle): 0 \(Appearance().secondsTitle)."
     estimatedSecondsLabel.isHidden = true
     totalItemsSizeMBLabel.isHidden = true
     countItemsLabel.isHidden = true
+    passwordTextField.text = nil
   }
 }
 
