@@ -16,9 +16,6 @@ let project = Project(
       infoPlist: .extendingDefault(with: [
         "CFBundleLocalizations": .array([
           .string("en"),
-          .string("de"),
-          .string("es"),
-          .string("it"),
           .string("ru")
         ])
       ]),

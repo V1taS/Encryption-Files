@@ -27,30 +27,6 @@ let project = Project(
       dependencies: [
         .external(name: "YandexMobileMetrica")
       ]
-    ),
-    Target(
-      name: "\(metricsService)Tests",
-      platform: .iOS,
-      product: .unitTests,
-      bundleId: "\(reverseOrganizationName).\(metricsService)Tests",
-      deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
-      infoPlist: .default,
-      sources: ["Tests/**"],
-      resources: [],
-      dependencies: [
-        .target(name: "\(metricsService)")
-      ]),
-    Target(
-      name: "\(metricsService)UITests",
-      platform: .iOS,
-      product: .uiTests,
-      bundleId: "\(reverseOrganizationName).\(metricsService)UITests",
-      deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
-      infoPlist: .default,
-      sources: ["UITests/**"],
-      resources: [],
-      dependencies: [
-        .target(name: "\(metricsService)")
-      ])
+    )
   ]
 )

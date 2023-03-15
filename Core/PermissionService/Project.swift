@@ -17,38 +17,10 @@ let project = Project(
       sources: [
         "Sources/**"
       ],
-      resources: [],
-      copyFiles: nil,
-      headers: nil,
-      entitlements: nil,
       scripts: [
         scriptSwiftLint
       ],
       dependencies: []
-    ),
-    Target(
-      name: "\(permissionService)Tests",
-      platform: .iOS,
-      product: .unitTests,
-      bundleId: "\(reverseOrganizationName).\(permissionService)Tests",
-      deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
-      infoPlist: .default,
-      sources: ["Tests/**"],
-      resources: [],
-      dependencies: [
-        .target(name: "\(permissionService)")
-      ]),
-    Target(
-      name: "\(permissionService)UITests",
-      platform: .iOS,
-      product: .uiTests,
-      bundleId: "\(reverseOrganizationName).\(permissionService)UITests",
-      deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
-      infoPlist: .default,
-      sources: ["UITests/**"],
-      resources: [],
-      dependencies: [
-        .target(name: "\(permissionService)")
-      ])
+    )
   ]
 )

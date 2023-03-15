@@ -18,39 +18,12 @@ let project = Project(
         "Sources/**"
       ],
       resources: [],
-      copyFiles: nil,
-      headers: nil,
-      entitlements: nil,
       scripts: [
         scriptSwiftLint
       ],
       dependencies: [
         .external(name: "CryptoSwift")
       ]
-    ),
-    Target(
-      name: "\(encryptionService)Tests",
-      platform: .iOS,
-      product: .unitTests,
-      bundleId: "\(reverseOrganizationName).\(encryptionService)Tests",
-      deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
-      infoPlist: .default,
-      sources: ["Tests/**"],
-      resources: [],
-      dependencies: [
-        .target(name: "\(encryptionService)")
-      ]),
-    Target(
-      name: "\(encryptionService)UITests",
-      platform: .iOS,
-      product: .uiTests,
-      bundleId: "\(reverseOrganizationName).\(encryptionService)UITests",
-      deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
-      infoPlist: .default,
-      sources: ["UITests/**"],
-      resources: [],
-      dependencies: [
-        .target(name: "\(encryptionService)")
-      ])
+    )
   ]
 )
