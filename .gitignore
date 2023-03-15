@@ -1,10 +1,6 @@
 ## User settings
 xcuserdata/
 .DS_Store
-Random Pro.xcworkspace/xcuserdata/v1tas.xcuserdatad/UserInterfaceState.xcuserstate
-Random Pro.xcworkspace/xcuserdata/TSSosina.xcuserdatad/UserInterfaceState.xcuserstate
-Random Pro.xcworkspace/xcuserdata/v1tas.xcuserdatad/UserInterfaceState.xcuserstate
-Random Pro.xcworkspace/xcuserdata/v1tas.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
