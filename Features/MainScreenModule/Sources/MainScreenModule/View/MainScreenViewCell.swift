@@ -92,8 +92,8 @@ final class MainScreenViewCell: UITableViewCell {
   }
   
   private func applyDefaultBehavior() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    contentView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = RandomColor.only.primaryWhite
+    contentView.backgroundColor = RandomColor.only.primaryWhite
     selectionStyle = .none
     
     customImageView.contentMode = .scaleAspectFill

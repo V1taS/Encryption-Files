@@ -4,9 +4,9 @@ import Foundation
 
 /// Info plist
 // Сборке для App store
-public let marketingVersion = "1.5"
+public let marketingVersion = "1.9"
 // С каждой сборкой увеличиваем на 1
-public let currentProjectVersion = "6"
+public let currentProjectVersion = "10"
 
 /// App
 public let organizationName = "SosinVitalii.com"
@@ -15,12 +15,12 @@ public let appName = "Encryption"
 public let appPath = "App"
 public let corePath = "Core"
 public let featuresPath = "Features"
+public let iosPath = "ios"
+public let macOSPath = "macOS"
 
 /// Core
 public let fileManagerService = "FileManagerService"
-public let metricsService = "MetricsService"
 public let permissionService = "PermissionService"
-public let notificationService = "NotificationService"
 public let encryptionService = "EncryptionService"
 
 /// Features

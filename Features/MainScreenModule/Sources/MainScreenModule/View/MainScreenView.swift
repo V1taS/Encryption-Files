@@ -64,7 +64,10 @@ final class MainScreenView: MainScreenViewProtocol {
   
   private var plugEmptyItemsLottie = LottieAnimationView(name: Appearance().plugEmptyItemsLottieImage,
                                                          bundle: .module)
-  private var decryptLottie = LottieAnimationView(name: Appearance().encryptLottieImage,
+  
+  private var encryptLottie = LottieAnimationView(name: Appearance().encryptLottieImage,
+                                                  bundle: .module)
+  private var decryptLottie = LottieAnimationView(name: Appearance().decryptLottieImage,
                                                   bundle: .module)
   
   private let encryptButton = ButtonView()
@@ -91,7 +94,9 @@ final class MainScreenView: MainScreenViewProtocol {
   
   func updateItemsWith(_ data: [(data: Data, name: String, extension: String)]) {
     decryptLottie.stop()
+    encryptLottie.stop()
     decryptLottie.isHidden = true
+    encryptLottie.isHidden = true
     
     countItemsLabel.text = "\(Appearance().countItemsTitle): \(data.count)"
     items = data
@@ -111,6 +116,7 @@ final class MainScreenView: MainScreenViewProtocol {
     totalItemsSizeMBLabel.isHidden = false
     countItemsLabel.isHidden = false
     estimatedSecondsLabel.isHidden = true
+    setButton(isEnabled: true)
   }
   
   func updateTotalItemsSizeMB(_ size: String) {
@@ -123,14 +129,18 @@ final class MainScreenView: MainScreenViewProtocol {
   }
   
   func encryptFilesSuccess() {
+    setButton(isEnabled: true)
     decryptLottie.stop()
+    encryptLottie.stop()
     decryptLottie.isHidden = true
+    encryptLottie.isHidden = true
     
     plugEmptyItemsLottie.isHidden = false
     plugEmptyItemsLottie.play()
   }
   
   func clearButtonAction() {
+    setButton(isEnabled: false)
     estimatedSecondsLabel.text = "\(Appearance().estimatedSecondsTitle): 0 \(Appearance().secondsTitle)."
     estimatedSecondsLabel.isHidden = true
     totalItemsSizeMBLabel.isHidden = true
@@ -149,7 +159,7 @@ private extension MainScreenView {
     }
     
     [passwordLabel, passwordTextField, countItemsLabel, totalItemsSizeMBLabel, estimatedSecondsLabel,
-     tableView, stackButtons, plugEmptyItemsLottie, decryptLottie].forEach {
+     tableView, stackButtons, plugEmptyItemsLottie, decryptLottie, encryptLottie].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -184,6 +194,13 @@ private extension MainScreenView {
       decryptLottie.bottomAnchor.constraint(equalTo: stackButtons.topAnchor),
       decryptLottie.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 2),
       
+      encryptLottie.leadingAnchor.constraint(equalTo: leadingAnchor),
+      encryptLottie.topAnchor.constraint(greaterThanOrEqualTo: estimatedSecondsLabel.bottomAnchor,
+                                         constant: 16),
+      encryptLottie.trailingAnchor.constraint(equalTo: trailingAnchor),
+      encryptLottie.bottomAnchor.constraint(equalTo: stackButtons.topAnchor),
+      encryptLottie.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 2),
+      
       tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
       tableView.topAnchor.constraint(equalTo: estimatedSecondsLabel.bottomAnchor, constant: 16),
       tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -197,9 +214,9 @@ private extension MainScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = RandomColor.only.primaryWhite
     
-    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = RandomColor.only.primaryWhite
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = appearance.estimatedRowHeight
     tableView.separatorStyle = .none
@@ -218,6 +235,12 @@ private extension MainScreenView {
     decryptLottie.loopMode = .loop
     decryptLottie.animationSpeed = Appearance().animationSpeed
     decryptLottie.clipsToBounds = true
+    
+    encryptLottie.isHidden = true
+    encryptLottie.contentMode = .scaleAspectFit
+    encryptLottie.loopMode = .playOnce
+    encryptLottie.animationSpeed = Appearance().animationSpeed
+    encryptLottie.clipsToBounds = true
     
     tableView.register(MainScreenViewCell.self,
                        forCellReuseIdentifier: MainScreenViewCell.reuseIdentifier)
@@ -272,12 +295,13 @@ private extension MainScreenView {
   
   @objc
   func encryptButtonAction() {
+    setButton(isEnabled: false)
     output?.estimatedSecondsActuon()
     output?.encryptButtonAction(items,
                                 password: passwordTextField.text ?? Appearance().passwordDefault)
     
-    decryptLottie.isHidden = false
-    decryptLottie.play()
+    encryptLottie.isHidden = false
+    encryptLottie.play()
     
     plugEmptyItemsLottie.isHidden = true
     plugEmptyItemsLottie.stop()
@@ -286,6 +310,7 @@ private extension MainScreenView {
   
   @objc
   func decryptButtonAction() {
+    setButton(isEnabled: false)
     output?.estimatedSecondsActuon()
     output?.decryptButtonAction(items, password: passwordTextField.text ?? Appearance().passwordDefault)
     
@@ -328,7 +353,8 @@ private extension MainScreenView {
   struct Appearance {
     let estimatedRowHeight: CGFloat = 400
     let plugEmptyItemsLottieImage = "empty_lottie"
-    let encryptLottieImage = "cell_lottie"
+    let decryptLottieImage = "cell_lottie"
+    let encryptLottieImage = "safe_data"
     let animationSpeed: CGFloat = 0.5
     
     let passwordTitle = "Введите пароль".localized()

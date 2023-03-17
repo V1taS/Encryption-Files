@@ -1,6 +1,8 @@
 import ProjectDescription
 
 let workspace = Workspace(
-  name: "Encryption Files",
-  projects: ["App/Encryption"]
+  name: "Encryption",
+  projects: [
+    "App/ios"
+  ]
 )

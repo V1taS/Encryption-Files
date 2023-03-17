@@ -1,14 +1,51 @@
 import Foundation
 import ProjectDescription
 
-public func getMainInfoPlist() -> ProjectDescription.InfoPlist {
+public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
   return .dictionary([
     "MARKETING_VERSION": .string("\(marketingVersion)"),
     "CFBundleShortVersionString": .string("\(marketingVersion)"),
     "CFBundleVersion": .string("\(currentProjectVersion)"),
     "CURRENT_PROJECT_VERSION": .string("\(currentProjectVersion)"),
     "PRODUCT_BUNDLE_IDENTIFIER": .string("com.sosinvitalii.Encryption-Files"),
-    "DISPLAY_NAME": .string("Encryption Files"),
+    "DISPLAY_NAME": .string("Encryption"),
+    "UISupportsDocumentBrowser": .boolean(true),
+    "CFBundleURLTypes": .array([
+      .dictionary([
+        "CFBundleURLName": .string("com.sosinvitalii.Encryption-Files.URLName"),
+        "CFBundleURLSchemes": .array([
+          .string("encryption-files")
+        ])
+      ])
+    ]),
+    "CFBundleDocumentTypes": .array([
+      .dictionary([
+        "CFBundleTypeExtensions": .array([
+          .string("pdf")
+        ]),
+        "CFBundleTypeName": .string("PDF Document"),
+        "CFBundleTypeRole": .string("Editor"),
+        "LSHandlerRank": .string("Owner")
+      ]),
+      .dictionary([
+        "CFBundleTypeExtensions": .array([
+          .string("png"),
+          .string("jpg"),
+          .string("jpeg")
+        ]),
+        "CFBundleTypeName": .string("Image"),
+        "CFBundleTypeRole": .string("Editor"),
+        "LSHandlerRank": .string("Owner")
+      ]),
+      .dictionary([
+        "CFBundleTypeExtensions": .array([
+          .string("txt")
+        ]),
+        "CFBundleTypeName": .string("Text"),
+        "CFBundleTypeRole": .string("Editor"),
+        "LSHandlerRank": .string("Owner")
+      ])
+    ]),
     "IPHONEOS_DEPLOYMENT_TARGET": .string("13.0"),
     "CFBundleExecutable": .string("Encryption"),
     "TAB_WIDTH": .string("2"),
@@ -26,8 +63,8 @@ public func getMainInfoPlist() -> ProjectDescription.InfoPlist {
     "ENABLE_TESTABILITY": .string("YES"),
     "VALID_ARCHS": .string("arm64"),
     "DTPlatformVersion": .string("13.0"),
-    "CFBundleName": .string("Encryption Files"),
-    "CFBundleDisplayName": .string("Encryption Files"),
+    "CFBundleName": .string("Encryption"),
+    "CFBundleDisplayName": .string("Encryption"),
     "CFBundleIdentifier": .string("com.sosinvitalii.Encryption-Files"),
     "LSApplicationCategoryType": .string("public.app-category.utilities"),
     "ITSAppUsesNonExemptEncryption": .boolean(false),
@@ -60,7 +97,7 @@ public func getMainInfoPlist() -> ProjectDescription.InfoPlist {
         "UIWindowSceneSessionRoleApplication": .array([
           .dictionary([
             "UISceneConfigurationName": .string("Default Configuration"),
-            "UISceneDelegateClassName": .string("SceneDelegate")
+            "UISceneDelegateClassName": .string("Encryption.SceneDelegate")
           ])
         ])
       ])
@@ -76,4 +113,34 @@ public func getMainInfoPlist() -> ProjectDescription.InfoPlist {
     ]),
     "UIStatusBarHidden": .boolean(false)
   ])
+}
+
+public func getMainMacOSInfoPlist() -> ProjectDescription.InfoPlist {
+    return .dictionary([
+        "MARKETING_VERSION": .string("\(marketingVersion)"),
+        "CFBundleShortVersionString": .string("\(marketingVersion)"),
+        "CFBundleVersion": .string("\(currentProjectVersion)"),
+        "CURRENT_PROJECT_VERSION": .string("\(currentProjectVersion)"),
+        "PRODUCT_BUNDLE_IDENTIFIER": .string("com.sosinvitalii.Encryption-Files.Mac"),
+        "CFBundleName": .string("Encryption"),
+        "CFBundleDisplayName": .string("Encryption"),
+        "CFBundleIdentifier": .string("com.sosinvitalii.Encryption-Files.Mac"),
+        "LSApplicationCategoryType": .string("public.app-category.utilities"),
+        "NSPrincipalClass": .string("NSApplication"),
+        "ITSAppUsesNonExemptEncryption": .boolean(false),
+        "CFBundlePackageType": .string("APPL"),
+        "NSCameraUsageDescription": .string("Please provide access to the Camera"),
+        "NSContactsUsageDescription": .string("Provide access to randomly generate contacts"),
+        "NSPhotoLibraryUsageDescription": .string("Please provide access to the Photo Library"),
+        "NSPhotoLibraryAddUsageDescription": .string("Please provide access to the Photo Library"),
+        "CFBundleInfoDictionaryVersion": .string("6.0"),
+        "DTXcode": .integer(1420),
+        "DTCompiler": .string("com.apple.compilers.llvm.clang.1_0"),
+        "CFBundleDevelopmentRegion": .string("en"),
+        "DTSDKBuild": .string("20C52"),
+        "DTPlatformBuild": .string("20C52"),
+        "DTPlatformName": .string("macos"),
+        "DTXcodeBuild": .string("14C18"),
+        "NSAccentColorName": .string("AccentColor"),
+    ])
 }

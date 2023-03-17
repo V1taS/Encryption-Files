@@ -10,12 +10,12 @@ let dependencies = Dependencies(
       .remote(url: "https://github.com/krzyzanowskim/CryptoSwift.git",
               requirement: .branch("main")),
       .remote(url: "https://github.com/yandexmobile/metrica-sdk-ios",
-              requirement: .upToNextMajor(from: "4.4.0"))
+              requirement: .upToNextMajor(from: "4.4.0")),
+      .remote(url: "https://github.com/yandexmobile/metrica-push-sdk-ios",
+              requirement: .upToNextMajor(from: "1.0.0"))
     ],
     productTypes: [
-      "RandomUIKit": .framework,
-      "Notifications": .framework,
-      "CryptoSwift": .framework
+      "RandomUIKit": .framework
     ]
   ),
   platforms: [.iOS]

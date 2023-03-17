@@ -68,6 +68,7 @@ final class MainScreenViewController: MainModuleInput {
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private var cacheEncryptionData: [(data: Data, name: String, extension: String)]?
   private var cacheRawData: [(data: Data, name: String, extension: String)]?
+  private var isProgress = false
   
   // MARK: - Initialization
   
@@ -132,11 +133,13 @@ extension MainScreenViewController: MainScreenViewOutput {
   func encryptButtonAction(_ data: [(data: Data, name: String, extension: String)],
                            password: String) {
     interactor.encryptButtonAction(data, password: password)
+    isProgress = true
   }
   
   func decryptButtonAction(_ data: [(data: Data, name: String, extension: String)],
                            password: String) {
     interactor.decryptButtonAction(data, password: password)
+    isProgress = true
   }
 }
 
@@ -146,11 +149,13 @@ extension MainScreenViewController: MainScreenInteractorOutput {
   func decryptionError() {
     moduleOutput?.decryptionError()
     didReceiveError()
+    isProgress = false
   }
   
   func encryptionError() {
     moduleOutput?.encryptionError()
     didReceiveError()
+    isProgress = false
   }
   
   func didReceiveEstimatedSeconds(_ seconds: Double) {
@@ -162,16 +167,18 @@ extension MainScreenViewController: MainScreenInteractorOutput {
     cacheEncryptionData = data
     moduleOutput?.shareButtonAction(data)
     moduleView.encryptFilesSuccess()
-    setupNavBar()
     moduleOutput?.encryptionSuccessful()
+    isProgress = false
+    setupNavBar()
   }
   
   func decryptFilesSuccess(_ data: [(data: Data, name: String, extension: String)]) {
     cacheEncryptionData = data
     moduleOutput?.shareButtonAction(data)
     moduleView.encryptFilesSuccess()
-    setupNavBar()
     moduleOutput?.decryptionSuccessful()
+    isProgress = false
+    setupNavBar()
   }
   
   func requestShareGallerySuccess() {
@@ -215,13 +222,19 @@ private extension MainScreenViewController {
                                          target: self,
                                          action: #selector(openFileButtonAction))
     
-    if let cacheRawData, !cacheRawData.isEmpty {
+    if !isProgress {
+      openFileButton.isEnabled = true
+    } else {
+      openFileButton.isEnabled = false
+    }
+    
+    if let cacheRawData, !cacheRawData.isEmpty, !isProgress {
       clearButton.isEnabled = true
     } else {
       clearButton.isEnabled = false
     }
     
-    if let cacheEncryptionData, !cacheEncryptionData.isEmpty {
+    if let cacheEncryptionData, !cacheEncryptionData.isEmpty, !isProgress {
       shareButton.isEnabled = true
     } else {
       shareButton.isEnabled = false
