@@ -25,9 +25,6 @@ let project = Project(
       resources: [
         "Resources/**"
       ],
-      copyFiles: nil,
-      headers: nil,
-      entitlements: nil,
       scripts: [
         scriptSwiftLint
       ],
