@@ -292,10 +292,6 @@ extension MainScreenCoordinator: UIDocumentPickerDelegate {
     }
     
     guard !listData.isEmpty else {
-      showNegativeAlertWith(title: Appearance().failedLoadImage,
-                            glyph: false,
-                            timeout: nil,
-                            active: {})
       return
     }
     mainScreenModule?.uploadContentsData(listData)
