@@ -6,8 +6,9 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
 import Lottie
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol MainScreenViewOutput: AnyObject {
@@ -214,9 +215,9 @@ private extension MainScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.only.primaryWhite
+    backgroundColor = fancyColor.only.primaryWhite
     
-    tableView.backgroundColor = RandomColor.only.primaryWhite
+    tableView.backgroundColor = fancyColor.only.primaryWhite
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = appearance.estimatedRowHeight
     tableView.separatorStyle = .none
@@ -253,7 +254,7 @@ private extension MainScreenView {
     stackButtons.distribution = .fillEqually
     stackButtons.spacing = 16
     passwordTextField.placeholder = "12345678"
-    passwordTextField.layer.borderColor = RandomColor.only.primaryGray.cgColor
+    passwordTextField.layer.borderColor = fancyColor.only.primaryGray.cgColor
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
     tap.cancelsTouchesInView = false
@@ -274,21 +275,21 @@ private extension MainScreenView {
     
     if isEnabled {
       encryptButton.gradientBackground = [
-        RandomColor.only.primaryRed,
-        RandomColor.only.primaryPink
+        fancyColor.only.primaryRed,
+        fancyColor.only.primaryPink
       ]
       decryptButton.gradientBackground = [
-        RandomColor.only.primaryGreen,
-        RandomColor.only.secondaryGreen
+        fancyColor.only.primaryGreen,
+        fancyColor.only.secondaryGreen
       ]
     } else {
       encryptButton.gradientBackground = [
-        RandomColor.only.primaryGray,
-        RandomColor.only.secondaryGray
+        fancyColor.only.primaryGray,
+        fancyColor.only.secondaryGray
       ]
       decryptButton.gradientBackground = [
-        RandomColor.only.primaryGray,
-        RandomColor.only.secondaryGray
+        fancyColor.only.primaryGray,
+        fancyColor.only.secondaryGray
       ]
     }
   }

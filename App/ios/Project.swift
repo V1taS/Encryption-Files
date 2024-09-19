@@ -31,9 +31,7 @@ let project = Project(
       ],
       dependencies: [
         // External
-        .external(name: "Notifications"),
-        .external(name: "YandexMobileMetrica"),
-        .external(name: "YandexMobileMetricaPush"),
+        .external(name: "FancyNotifications"),
         
         // Core
         .project(target: fileManagerService,

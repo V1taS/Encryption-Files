@@ -6,8 +6,9 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
 import Lottie
+import FancyStyle
 
 // MARK: - SmallButtonCell
 
@@ -92,8 +93,8 @@ final class MainScreenViewCell: UITableViewCell {
   }
   
   private func applyDefaultBehavior() {
-    backgroundColor = RandomColor.only.primaryWhite
-    contentView.backgroundColor = RandomColor.only.primaryWhite
+    backgroundColor = fancyColor.only.primaryWhite
+    contentView.backgroundColor = fancyColor.only.primaryWhite
     selectionStyle = .none
     
     customImageView.contentMode = .scaleAspectFill

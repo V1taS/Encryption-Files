@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol RootCoordinatorOutput: AnyObject {}

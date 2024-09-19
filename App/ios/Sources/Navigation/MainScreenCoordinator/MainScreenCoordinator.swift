@@ -9,12 +9,12 @@ import UIKit
 import MobileCoreServices
 import PhotosUI
 import MainScreenModule
-import YandexMobileMetrica
-import Notifications
+import FancyNotifications
 import FileManagerService
 import PermissionService
 import EncryptionService
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainScreenCoordinatorOutput: AnyObject {}
@@ -180,11 +180,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
 // MARK: - Private
 
 private extension MainScreenCoordinator {
-  func track(event: MetricsnEvents) {
-    YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
-      print("REPORT ERROR: %@", error.localizedDescription)
-    }
-  }
+  func track(event: MetricsnEvents) {}
   
   func getImageActionSheet() -> UIAlertController {
     let appearance = Appearance()

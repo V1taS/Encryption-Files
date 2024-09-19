@@ -29,7 +29,8 @@ let project = Project(
         scriptSwiftLint
       ],
       dependencies: [
-        .external(name: "RandomUIKit")
+        .external(name: "FancyUIKit"),
+        .external(name: "FancyUIKit")
       ]
     ),
     Target(
