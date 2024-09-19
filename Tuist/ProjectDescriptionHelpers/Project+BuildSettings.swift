@@ -53,29 +53,11 @@ public let projectBuildIOSSettings: Settings = .settings(
     "TARGETED_DEVICE_FAMILY": "1,2",
     "ENABLE_TARGET_PARALLELIZATION": "YES"
   ],
-  debug: [
-    "DEBUG_INFORMATION_FORMAT": "dwarf",
-    "ENABLE_TESTABILITY": "YES",
-    "EXCLUDED_ARCHS": "",
-    "GCC_DYNAMIC_NO_PIC": "NO",
-    "GCC_OPTIMIZATION_LEVEL": "0",
-    "GCC_PREPROCESSOR_DEFINITIONS": "DEBUG=1 $(inherited)",
-    "MTL_ENABLE_DEBUG_INFO": "INCLUDE_SOURCE",
-    "ONLY_ACTIVE_ARCH": "YES",
-    "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "DEBUG",
-    "SWIFT_OPTIMIZATION_LEVEL": "-Onone",
+  configurations: [
+    .debug(name: "Debug", xcconfig: .relativeToRoot("Release.xcconfig")),
+    .release(name: "Release", xcconfig: .relativeToRoot("Release.xcconfig"))
   ],
-  release: [
-    "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
-    "ENABLE_NS_ASSERTIONS": "NO",
-    "EXCLUDED_ARCHS": "",
-    "GCC_OPTIMIZATION_LEVEL": "s",
-    "MTL_ENABLE_DEBUG_INFO": "NO",
-    "ONLY_ACTIVE_ARCH": "NO",
-    "SWIFT_COMPILATION_MODE": "wholemodule",
-    "SWIFT_OPTIMIZATION_LEVEL": "-O",
-    "VALIDATE_PRODUCT": "YES",
-  ]
+  defaultSettings: .recommended
 )
 
 public let targetBuildIOSSettings: Settings = .settings(
@@ -125,33 +107,15 @@ public let targetBuildIOSSettings: Settings = .settings(
     "IPHONEOS_DEPLOYMENT_TARGET": "13.0",
     "MTL_FAST_MATH": "YES",
     "SDKROOT": "iphoneos",
-    "DEVELOPMENT_TEAM": "34VDSPZYU9",
-    "CODE_SIGN_STYLE": "Manual",
-    "CODE_SIGN_IDENTITY": "Apple Distribution: Vitalii Sosin (34VDSPZYU9)",
-    "PROVISIONING_PROFILE_SPECIFIER": "788e5d68-8cde-4c44-b7cb-c379ff8790b9",
-    "TARGETED_DEVICE_FAMILY": "1,2"
+    "DEVELOPMENT_TEAM": "\(developmentTeam)",
+    "CODE_SIGN_STYLE": "Automatic",
+    "CODE_SIGN_IDENTITY": "\(codeSignIdentity)",
+    "TARGETED_DEVICE_FAMILY": "1,2",
+    "ENABLE_TARGET_PARALLELIZATION": "YES"
   ],
-  debug: [
-    "DEBUG_INFORMATION_FORMAT": "dwarf",
-    "ENABLE_TESTABILITY": "YES",
-    "EXCLUDED_ARCHS": "",
-    "GCC_DYNAMIC_NO_PIC": "NO",
-    "GCC_OPTIMIZATION_LEVEL": "0",
-    "GCC_PREPROCESSOR_DEFINITIONS": "DEBUG=1 $(inherited)",
-    "MTL_ENABLE_DEBUG_INFO": "INCLUDE_SOURCE",
-    "ONLY_ACTIVE_ARCH": "YES",
-    "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "DEBUG",
-    "SWIFT_OPTIMIZATION_LEVEL": "-Onone"
+  configurations: [
+    .debug(name: "Debug", xcconfig: .relativeToRoot("Release.xcconfig")),
+    .release(name: "Release", xcconfig: .relativeToRoot("Release.xcconfig"))
   ],
-  release: [
-    "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
-    "ENABLE_NS_ASSERTIONS": "NO",
-    "EXCLUDED_ARCHS": "",
-    "GCC_OPTIMIZATION_LEVEL": "s",
-    "MTL_ENABLE_DEBUG_INFO": "NO",
-    "ONLY_ACTIVE_ARCH": "NO",
-    "SWIFT_COMPILATION_MODE": "wholemodule",
-    "SWIFT_OPTIMIZATION_LEVEL": "-O",
-    "VALIDATE_PRODUCT": "YES"
-  ]
+  defaultSettings: .recommended
 )

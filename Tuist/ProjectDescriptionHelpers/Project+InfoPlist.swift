@@ -3,10 +3,10 @@ import ProjectDescription
 
 public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
   return .dictionary([
-    "MARKETING_VERSION": .string("\(marketingVersion)"),
-    "CFBundleShortVersionString": .string("\(marketingVersion)"),
-    "CFBundleVersion": .string("\(currentProjectVersion)"),
-    "CURRENT_PROJECT_VERSION": .string("\(currentProjectVersion)"),
+    "MARKETING_VERSION": .string("$(MARKETING_VERSION)"),
+    "CFBundleShortVersionString": .string("$(MARKETING_VERSION)"),
+    "CFBundleVersion": .string("$(CURRENT_PROJECT_VERSION)"),
+    "CURRENT_PROJECT_VERSION": .string("$(CURRENT_PROJECT_VERSION)"),
     "PRODUCT_BUNDLE_IDENTIFIER": .string("com.sosinvitalii.Encryption-Files"),
     "DISPLAY_NAME": .string("Encryption"),
     "CFBundleAllowMixedLocalizations": .boolean(true),
@@ -118,10 +118,10 @@ public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
 
 public func getMainMacOSInfoPlist() -> ProjectDescription.InfoPlist {
   return .dictionary([
-    "MARKETING_VERSION": .string("\(marketingVersion)"),
-    "CFBundleShortVersionString": .string("\(marketingVersion)"),
-    "CFBundleVersion": .string("\(currentProjectVersion)"),
-    "CURRENT_PROJECT_VERSION": .string("\(currentProjectVersion)"),
+    "MARKETING_VERSION": .string("$(MARKETING_VERSION)"),
+    "CFBundleShortVersionString": .string("$(MARKETING_VERSION)"),
+    "CFBundleVersion": .string("$(CURRENT_PROJECT_VERSION)"),
+    "CURRENT_PROJECT_VERSION": .string("$(CURRENT_PROJECT_VERSION)"),
     "PRODUCT_BUNDLE_IDENTIFIER": .string("com.sosinvitalii.Encryption-Files.Mac"),
     "CFBundleName": .string("Encryption"),
     "CFBundleDisplayName": .string("Encryption"),
