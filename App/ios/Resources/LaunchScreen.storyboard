@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,18 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Encryption Files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFg-Lo-AQk">
-                                <rect key="frame" x="99.666666666666686" y="410" width="194" height="32"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchMainScreenImageNew" translatesAutoresizingMaskIntoConstraints="NO" id="j7H-LT-I0c">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fFg-Lo-AQk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="RII-zq-4r8"/>
-                            <constraint firstItem="fFg-Lo-AQk" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="oUB-0R-9wZ"/>
+                            <constraint firstItem="j7H-LT-I0c" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7u4-Ta-Wj5"/>
+                            <constraint firstItem="j7H-LT-I0c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="95J-zY-iho"/>
+                            <constraint firstAttribute="bottom" secondItem="j7H-LT-I0c" secondAttribute="bottom" id="9bp-YE-W7R"/>
+                            <constraint firstItem="j7H-LT-I0c" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="cfJ-FE-JDJ"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -36,4 +35,7 @@
             <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launchMainScreenImageNew" width="1000" height="2000"/>
+    </resources>
 </document>
