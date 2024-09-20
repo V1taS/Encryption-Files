@@ -165,7 +165,17 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openFileButtonAction() {
-    mainScreenModule?.present(getImageActionSheet(), animated: true)
+    let actionSheet = getImageActionSheet()
+    
+    // Проверяем, что устройство — iPad
+    if let popoverController = actionSheet.popoverPresentationController, UIDevice.current.userInterfaceIdiom == .pad {
+      popoverController.sourceView = mainScreenModule?.view
+      popoverController.sourceRect = CGRect(x: mainScreenModule?.view.bounds.midX ?? 0, y: mainScreenModule?.view.bounds.midY ?? 0, width: 0, height: 0)
+      popoverController.permittedArrowDirections = []
+    }
+    
+    // Показать UIAlertController
+    mainScreenModule?.present(actionSheet, animated: true)
   }
   
   func checkDarkMode() {
