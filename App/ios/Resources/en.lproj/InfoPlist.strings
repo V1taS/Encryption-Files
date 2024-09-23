@@ -1,4 +1,4 @@
-"NSPhotoLibraryAddUsageDescription" = "Share your gallery so you can upload a photo for further encryption";
-"NSPhotoLibraryUsageDescription" = "Share your gallery so you can upload a photo for further encryption";
-"NSDownloadsDirectoryUsageDescription" = "Share your files so you can save";
-"NSDocumentsDirectoryUsageDescription" = "Share your files so you can save";
+"NSPhotoLibraryUsageDescription" = "Please allow access to your photo library to select photos for encryption and secure storage in the app";
+"NSPhotoLibraryAddUsageDescription" = "Allow the app to save encrypted photos to your photo library for convenient access";
+"NSDocumentsDirectoryUsageDescription" = "Allow access to your documents to encrypt important files and store them securely";
+"NSDownloadsDirectoryUsageDescription" = "Allow access to your downloads to encrypt downloaded files and ensure their security";
