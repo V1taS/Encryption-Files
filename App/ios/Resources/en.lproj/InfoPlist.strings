@@ -1,4 +1,7 @@
-"NSPhotoLibraryUsageDescription" = "Please allow access to your photo library to select photos for encryption and secure storage in the app";
-"NSPhotoLibraryAddUsageDescription" = "Allow the app to save encrypted photos to your photo library for convenient access";
-"NSDocumentsDirectoryUsageDescription" = "Allow access to your documents to encrypt important files and store them securely";
-"NSDownloadsDirectoryUsageDescription" = "Allow access to your downloads to encrypt downloaded files and ensure their security";
+"NSPhotoLibraryUsageDescription" = "Please allow access to your photo library to select photos for encryption and secure storage in the app. This helps protect your personal images from unauthorized access.";
+
+"NSPhotoLibraryAddUsageDescription" = "Allow the app to save encrypted photos to your photo library for convenient access. This enables you to quickly find and view protected images in the future.";
+
+"NSDocumentsDirectoryUsageDescription" = "Please allow access to your documents so we can encrypt important files and store them securely. This ensures the safety of your confidential data.";
+
+"NSDownloadsDirectoryUsageDescription" = "Allow access to your downloads to encrypt downloaded files and ensure their security. This protects your important downloads from external interference.";
